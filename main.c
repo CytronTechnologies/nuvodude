@@ -1,10 +1,10 @@
 /**********************************************************************************
  **********************************************************************************
  ***
- ***    esptool main routine
+ ***    nuvodude main routine
  ***    - parses the command line parameters and executes the given commands
  ***
- ***    Copyright (C) 2014 Christian Klippel <ck@atelier-klippel.de>
+ ***    Copyright (C) 2016 Ng Beng Chet <bengchet@cytron.com.my>
  ***
  ***    This program is free software; you can redistribute it and/or modify
  ***    it under the terms of the GNU General Public License as published by
@@ -15,10 +15,6 @@
  ***    but WITHOUT ANY WARRANTY; without even the implied warranty of
  ***    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  ***    GNU General Public License for more details.
- ***
- ***    You should have received a copy of the GNU General Public License along
- ***    with this program; if not, write to the Free Software Foundation, Inc.,
- ***    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***
  **/
 
@@ -46,7 +42,8 @@ int main(int argc, char **argv)
         LOGERR("No arguments given");
         return 0;
     }
-	infohelper_set_infolevel(1);
+
+    infohelper_set_infolevel(1);
     infohelper_set_argverbosity(num_args, arg_ptr);
     
     LOGINFO("nuvodude v" VERSION " - (c) 2016 Ng Beng Chet <bengchet@cytron.com.my>");
@@ -63,15 +60,15 @@ int main(int argc, char **argv)
         arg_ptr += num_args_parsed;
     }
 	
-	if(!nvtcomm_open())
-		goto EXITERROR;
-	nvtcomm_get_chip_info();
-	//nvtcomm_load_file();
-	if(nvtcomm_file_ready())
-		nvtcomm_upload_file();
+    if(!nvtcomm_open())
+	goto EXITERROR;
+
+    nvtcomm_get_chip_info();
+
+    if(nvtcomm_file_ready())
+	nvtcomm_upload_file();
     
-    //if(nvtcomm_file_uploaded())
-		nvtcomm_start_app(1);
+    nvtcomm_start_app(1);
 	
     return 0;
     
