@@ -1,0 +1,26 @@
+language: cpp
+matrix:
+  include:
+  - os: linux
+    sudo: false
+    compiler: gcc
+    env: PLATFORM=linux64
+  - os: osx
+    compiler: clang
+    env: PLATFORM=osx
+script: make dist
+notifications:
+  email:
+    recipients:
+    - bengchet@cytron.com.my
+    on_success: change
+    on_failure: change
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: HEgJdhG6pkRthHYAeJdUG/R9vhTPOp6oARxtylHc5debrA3NDx5HemrWamnDfz2LIO65zLJ2nxjVglHFRRskFxB3iR8wmW797hMfjGOajb6dT7M5BdnpJzTdnmuaUXjm+l5a0V2r+ZO+2gWrBkavEUrq8WECphVowHyTa16RrRkpuy0iJWCOqkdblKhQvYdSRqwEMmtm0chiFhbhjt9vZr5QR9dzxKcv+N3sNSrlIvRoQOYfJBIPNf8E81f2HbaZUboNzO06bVZ2Yf4/x0mXLorbnVFcUbOx6r3WEkU6NTaZzw8c3gN/Pq97nKuifcNiAjdy+jOuVUnQc/J0fbs0Qt4B00nzJhUZyFUHwYwlnbQQ49QgVCb3kNRUIJW5k2fYGIf4qSLZCW40YVwcsNesPnolN77hq3mhFxnu83VNR8FFtp4n8m3FFKNCXggq4xcq57oECKvhouzK9p/4yti9hlQffex4WmTxGI/JtOTnO4+VTdo5IZnZMy/lBINAs7UpFASCOlQgbBt7x8DllWp1MgXzM9Sfi1R5T/ZoxgCh7CUoE8qrr1P3yLdbIvNHYfVf0ilN/fcU+Kww+QO++Ie1UoWCPJnM+R9pPe9gBKznt3w1XhtTUAXiQ9aAcs0FcTde5Kemabl8RJGwG57JPac4JyDBag07D4DWmSRFJ9JX1HM=
+  file: nuvodude-$TRAVIS_TAG-$PLATFORM.tar.gz
+  on:
+    repo: bengchet/nuvodude
+    tags: true
