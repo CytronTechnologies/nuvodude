@@ -18,7 +18,7 @@ else
 	    ifeq ($(UNAME_M),i686)
 	        DIST_SUFFIX := linux32
 	    endif
-        ifeq ($(UNAME_M),armv6l)
+        ifeq ($(UNAME_M), $(filter $(UNAME_M),armv6l armv7l))
             DIST_SUFFIX := linux-armhf
         endif
     endif
